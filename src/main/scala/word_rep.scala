@@ -5,7 +5,8 @@ import java.io.File
 
 import scalaz.{ \/, -\/, \/- }
 
-import word_rep.corpus.BreakCorpus
+import word_rep.corpus.Corpus
+import word_rep.corpus.break.BreakCorpus
 
 object Main extends App {
   val version = "0.1"
