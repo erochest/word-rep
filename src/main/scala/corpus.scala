@@ -14,7 +14,6 @@ import scalaz.{ \/, -\/, \/- }
 object BreakCorpus {
   val inputDir        : String  = "input"
   val outputDir       : String  = "corpus"
-  val breakSentences  : Boolean = false
   val trainingRatio   : Double  = 0.6
   val validationRatio : Double  = 0.2
   val testRatio       : Double  = 0.2
@@ -22,7 +21,6 @@ object BreakCorpus {
   def break(
     inputDir        : String,
     outputDir       : String,
-    breakSentences  : Boolean,
     trainingRatio   : Double,
     validationRatio : Double,
     testRatio       : Double

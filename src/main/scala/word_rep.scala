@@ -14,7 +14,6 @@ object Main extends App {
     mode            : String  = "",
     inputDir        : String  = BreakCorpus.inputDir,
     outputDir       : String  = BreakCorpus.outputDir,
-    breakSentences  : Boolean = BreakCorpus.breakSentences,
     trainingRatio   : Double  = BreakCorpus.trainingRatio,
     validationRatio : Double  = BreakCorpus.validationRatio,
     testRatio       : Double  = BreakCorpus.testRatio
@@ -32,9 +31,6 @@ object Main extends App {
         opt[String]("output-dir").abbr("o")
           .text("the directory to put the output files into.")
           .action { (o, c) => c.copy(outputDir=o) },
-        opt[Unit]("break-sentences").abbr("s")
-          .text("break the input files into sentences?")
-          .action { (_, c) => c.copy(breakSentences=true) },
         opt[Double]("training-ratio").abbr("tr")
           .text("The proportion of files to include in the training set.")
           .action { (tr, c) => c.copy(trainingRatio=tr) },
@@ -53,7 +49,6 @@ object Main extends App {
         BreakCorpus.break(
           config.inputDir, 
           config.outputDir,
-          config.breakSentences,
           config.trainingRatio,
           config.validationRatio,
           config.testRatio
