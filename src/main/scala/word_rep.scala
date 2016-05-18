@@ -19,7 +19,10 @@ object Main extends App {
     outputDir       : String  = BreakCorpus.outputDir,
     trainingRatio   : Double  = BreakCorpus.trainingRatio,
     validationRatio : Double  = BreakCorpus.validationRatio,
-    testRatio       : Double  = BreakCorpus.testRatio
+    testRatio       : Double  = BreakCorpus.testRatio,
+    batchSize       : Int     = 1000,
+    iterations      : Int     = 3,
+    layerSize       : Int     = 150
   ) 
 
   val parser = new scopt.OptionParser[Config]("word_rep") {
@@ -47,12 +50,21 @@ object Main extends App {
       cmd("train").action { (_, c) => c.copy(mode="train") }
         .text("Train a corpus using a skip-gram model.")
         .children(
-          opt[String]("input-dir").abbr("i")
-            .text("the directory containing the input corpus.")
+          opt[String]("input").abbr("i")
+            .text("the file containing the input corpus, one sentence per line.")
             .action { (i, c) => c.copy(inputDir=i) },
-          opt[String]("output-dir").abbr("o")
-            .text("the directory to put the output files into.")
-            .action { (o, c) => c.copy(outputDir=o) }
+          opt[String]("output").abbr("o")
+            .text("the file to put the output files into.")
+            .action { (o, c) => c.copy(outputDir=o) },
+          opt[Int]("batch-size").abbr("b")
+            .text("the size of each batch.")
+            .action { (b, c) => c.copy(batchSize=b) },
+          opt[Int]("iterations").abbr("I")
+            .text("the number of training iterations to run.")
+            .action { (i, c) => c.copy(iterations=i) },
+          opt[Int]("layer-size").abbr("l")
+            .text("the number of nodes in the features in the word vector.")
+            .action { (l, c) => c.copy(layerSize=l) }
         )
   }
 
@@ -67,7 +79,12 @@ object Main extends App {
           config.testRatio
         )
       else if (config.mode == "train") {
-        (new Trainer(Paths.get(config.inputDir)))
+        (new Trainer(
+            Paths.get(config.inputDir),
+            config.batchSize,
+            config.iterations,
+            config.layerSize
+        ))
           .train(Paths.get(config.outputDir))
       } else {
         -\/("Invalid mode")
