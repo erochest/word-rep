@@ -8,7 +8,8 @@ lazy val root = (project in file(".")).
       libraryDependencies ++= Seq(
           "com.github.scopt"   %% "scopt"       % "3.4.0",
           "org.scalaz"         %% "scalaz-core" % "7.2.2",
-          "com.jasonbaldridge" %  "chalk"       % "1.1.0"
+          "com.jasonbaldridge" %  "chalk"       % "1.1.0",
+          "org.nd4j"           %  "nd4j"        % "0.4-rc3.9"
       ),
       resolvers ++= Seq(
           "opennlp sourceforge repo" at "http://opennlp.sourceforge.net/maven2",
