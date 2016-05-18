@@ -81,7 +81,7 @@ object Main extends App {
     case -\/(msg) =>
       println(msg)
       sys.exit(1)
-    case \/-( () ) => sys.exit(0)
+    case \/-( () ) => ()
   }
 
 }
