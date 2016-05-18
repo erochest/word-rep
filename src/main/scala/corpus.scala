@@ -4,7 +4,6 @@ package word_rep.corpus
 import java.io.{File,FileInputStream}
 import java.nio.file.{Path}
 
-
 import chalk.tools.sentdetect._
 import chalk.tools.tokenize._
 
